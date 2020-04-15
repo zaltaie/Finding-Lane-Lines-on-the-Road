@@ -4,7 +4,7 @@ import numpy as np
 def make_coordinates(image, line_parameters):
     slope, intercept = line_parameters
     y1 = image.shape[0]
-    y2 = int(y1*(3/4))
+    y2 = int(y1*(3/5))
     x1 = int((y1 - intercept)/slope)
     x2 = int((y2 - intercept)/slope)
     return np.array([x1, y1, x2, y2])
@@ -44,12 +44,12 @@ def display_lines(image, lines):
 
 def region_of_interest(image):
     height = image.shape[0]
-    polygons = np.array([
-    [(200, height), (1100, height), (550, 250)]
-    ])
     #polygons = np.array([
-    #[(500, height), (1600, height), (1000, 550)]
+    #[(200, height), (1100, height), (550, 250)]
     #])
+    polygons = np.array([
+    [(0, height), (2800, height), (1600, 1000)]
+    ])
     mask = np.zeros_like(image)
     cv2.fillPoly(mask, polygons, 255)
     masked_image = cv2.bitwise_and(image, mask)
@@ -70,7 +70,7 @@ cv2.waitKey(0)
 '''
 
 # Video processing
-cap = cv2.VideoCapture('train/test2.mp4')
+cap = cv2.VideoCapture('test/Movie.mp4')
 while(cap.isOpened()):
     _, frame = cap.read()
     canny_image = canny(frame)

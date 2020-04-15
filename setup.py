@@ -9,7 +9,7 @@ def canny(image):
     canny = cv2.Canny(blur, 50, 150)
     return canny
 
-image = cv2.imread('screenshot.png')
+image = cv2.imread('test/image.JPG')
 lane_image = np.copy(image)
 canny_image = canny(lane_image)
 plt.imshow(canny_image)
